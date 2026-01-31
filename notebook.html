@@ -117,7 +117,7 @@
             text-shadow: 0 0 5px rgba(255,255,255,0.2);
         }
 
-        /* Botão Voltar (Azul Metálico) */
+        /* Botão Voltar */
         .btn-back {
             background: linear-gradient(180deg, #00509d 0%, #002a52 100%);
             border: 2px solid #00c6ff;
@@ -329,6 +329,7 @@
         <div class="products-grid">
             
             <div class="card">
+                
                 <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?q=80&w=400&auto=format&fit=crop" class="card-img" alt="Notebook Gamer">
                 <div class="item-info">
                     <div class="item-name">Alienware M16</div>
@@ -339,6 +340,7 @@
             </div>
 
             <div class="card">
+                
                 <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca4?q=80&w=400&auto=format&fit=crop" class="card-img" alt="MacBook Pro">
                 <div class="item-info">
                     <div class="item-name">MacBook Pro M3</div>
@@ -349,6 +351,7 @@
             </div>
 
             <div class="card">
+                
                 <img src="https://images.unsplash.com/photo-1593642632823-8f7853670961?q=80&w=400&auto=format&fit=crop" class="card-img" alt="Dell XPS">
                 <div class="item-info">
                     <div class="item-name">Dell XPS 13 Plus</div>
@@ -359,6 +362,7 @@
             </div>
 
             <div class="card">
+                
                 <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?q=80&w=400&auto=format&fit=crop" class="card-img" alt="Acer Nitro">
                 <div class="item-info">
                     <div class="item-name">Acer Nitro 5</div>
@@ -410,6 +414,7 @@
     <script>
         // --- LÓGICA DO CARRINHO E MODAIS (Mesma do Index) ---
         let cart = [];
+        // (Nota: O carrinho reseta ao mudar de página em HTML estático)
 
         function addToCart(name, price, image) {
             cart.push({ name, price, image });
