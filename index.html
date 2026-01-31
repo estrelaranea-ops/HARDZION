@@ -12,7 +12,13 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
         
         body {
-            background-color: #000000;
+            /* IMAGEM DE FUNDO FUTURISTA COM FILTRO ESCURO */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), 
+                              url('https://images.unsplash.com/photo-1547082299-de196ea013d6?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Fundo fixo ao rolar */
+            
             color: #ffffff;
             min-height: 100vh;
             display: flex;
@@ -27,7 +33,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+            backdrop-filter: blur(5px);
         }
 
         .logo {
@@ -35,6 +43,7 @@
             font-size: 2.5rem;
             letter-spacing: 2px;
             text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(0, 198, 255, 0.7); /* Brilho no Logo */
         }
 
         .header-right {
@@ -59,8 +68,9 @@
             align-items: center;
             gap: 5px;
             transition: 0.3s;
+            position: relative; 
         }
-        .user-btn:hover { background: #333; }
+        .user-btn:hover { background: rgba(255, 255, 255, 0.1); }
 
         /* Contador do carrinho */
         .cart-count {
@@ -94,7 +104,8 @@
             font-family: 'Orbitron', sans-serif;
             font-size: 1.5rem;
             margin-bottom: 20px;
-            color: #888;
+            color: #ddd;
+            text-shadow: 0 0 5px rgba(255,255,255,0.3);
         }
 
         /* --- CARDS DE PROMOÇÃO --- */
@@ -115,10 +126,10 @@
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
-            background-color: #111;
+            background-color: rgba(17, 17, 17, 0.9); /* Fundo um pouco transparente */
             transition: transform 0.3s;
         }
-        .card:hover { transform: translateY(-5px); border-color: #00c200; }
+        .card:hover { transform: translateY(-5px); border-color: #00c200; box-shadow: 0 0 15px rgba(0, 194, 0, 0.4); }
 
         .item-placeholder {
             width: 100%;
@@ -201,10 +212,9 @@
         }
 
         .cat-btn {
-            /* Gradiente Metálico Azul */
             background: linear-gradient(180deg, #00509d 0%, #002a52 100%);
             color: white;
-            border: 2px solid #00c6ff; /* Borda Ciano Brilhante */
+            border: 2px solid #00c6ff;
             padding: 12px 20px;
             font-size: 0.9rem;
             font-weight: bold;
@@ -220,7 +230,6 @@
         }
 
         .cat-btn:hover {
-            /* Efeito de brilho ao passar o mouse */
             background: linear-gradient(180deg, #0073e6 0%, #004080 100%);
             border-color: #ffffff;
             box-shadow: 0 0 15px #00c6ff;
@@ -347,213 +356,3 @@
             margin-top: 15px;
             text-transform: uppercase;
         }
-        .btn-finalize:hover { background-color: #009900; }
-
-        @media (max-width: 768px) {
-            header { flex-direction: column; gap: 15px; }
-            .promo-container { flex-direction: column; align-items: center; }
-            .categories-nav { gap: 10px; }
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <div class="logo">HARDZION</div>
-        <div class="header-right">
-            <span class="wolf-coins">WOLF COINS: 0</span>
-            <div class="user-actions">
-                <button class="user-btn" onclick="openLoginModal()">
-                    <i class="fas fa-user"></i> Login / Cadastro
-                </button>
-                
-                <button class="user-btn" onclick="openCartModal()">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span id="cart-count" class="cart-count" style="display: none;">0</span>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <main>
-        <div class="section-title">Estética do site!</div>
-
-        <div class="promo-container">
-            <div class="card">
-                <div class="item-placeholder">
-                    <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?q=80&w=400&auto=format&fit=crop" class="card-img" alt="CPU">
-                </div>
-                <div class="item-title">Item em Promoção 01<br><span style="font-size:0.8rem; color:#aaa;">Processador i9</span></div>
-                <div class="item-price">R$ 3.999,00</div>
-                <div class="action-row">
-                    <button class="btn-comprar" onclick="addToCart('Processador i9', 3999.00, 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?q=80&w=400&auto=format&fit=crop')">COMPRAR</button>
-                    <button class="btn-plus">+</button>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="item-placeholder">
-                    <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?q=80&w=400&auto=format&fit=crop" class="card-img" alt="GPU">
-                </div>
-                <div class="item-title">Item em Promoção 02<br><span style="font-size:0.8rem; color:#aaa;">Placa de Vídeo</span></div>
-                <div class="item-price">R$ 2.500,00</div>
-                <div class="action-row">
-                    <button class="btn-comprar" onclick="addToCart('Placa de Vídeo', 2500.00, 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?q=80&w=400&auto=format&fit=crop')">COMPRAR</button>
-                    <button class="btn-plus">+</button>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="item-placeholder">
-                     <img src="https://images.unsplash.com/photo-1562976540-1502c2145186?q=80&w=400&auto=format&fit=crop" class="card-img" alt="RAM">
-                </div>
-                <div class="item-title">Item em Promoção 03<br><span style="font-size:0.8rem; color:#aaa;">Kit Memória</span></div>
-                <div class="item-price">R$ 450,00</div>
-                <div class="action-row">
-                    <button class="btn-comprar" onclick="addToCart('Kit Memória', 450.00, 'https://images.unsplash.com/photo-1562976540-1502c2145186?q=80&w=400&auto=format&fit=crop')">COMPRAR</button>
-                    <button class="btn-plus">+</button>
-                </div>
-            </div>
-        </div>
-
-        <nav class="categories-nav">
-            <button class="cat-btn" onclick="window.location.href='processadores.html'">Processadores</button>
-            <button class="cat-btn" onclick="window.location.href='memoria.html'">Memória RAM</button>
-            <button class="cat-btn" onclick="window.location.href='ssd.html'">SSD</button>
-            <button class="cat-btn" onclick="window.location.href='placamae.html'">Placas Mãe</button>
-            <button class="cat-btn" onclick="window.location.href='kits.html'">Kits</button>
-            <button class="cat-btn" onclick="window.location.href='pcprontos.html'">PC Prontos</button>
-        </nav>
-
-    </main>
-
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('loginModal')">&times;</span>
-            <h2 style="text-align: center; color: #ff0000; font-family: 'Orbitron', sans-serif; margin-bottom: 20px;">CADASTRO</h2>
-            <form onsubmit="event.preventDefault(); register();">
-                <div class="form-group">
-                    <label>Gmail:</label>
-                    <input type="email" placeholder="seu@gmail.com" required>
-                </div>
-                <div class="form-group">
-                    <label>Senha:</label>
-                    <input type="password" placeholder="Sua senha secreta" required>
-                </div>
-                <div class="form-group">
-                    <label>Número de Telefone:</label>
-                    <input type="tel" placeholder="(00) 90000-0000" required>
-                </div>
-                <div class="form-group">
-                    <label>Endereço:</label>
-                    <input type="text" placeholder="Rua, Número, Bairro" required>
-                </div>
-                <button type="submit" class="btn-submit">CONFIRMAR</button>
-            </form>
-        </div>
-    </div>
-
-    <div id="cartModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('cartModal')">&times;</span>
-            <h2 style="text-align: center; color: #00c200; font-family: 'Orbitron', sans-serif; margin-bottom: 20px;">SEU CARRINHO</h2>
-            
-            <div id="cartItemsContainer">
-                <p style="text-align: center; color: #777;">Seu carrinho está vazio.</p>
-            </div>
-
-            <div class="cart-total">
-                Total: <span id="cartTotal">R$ 0,00</span>
-            </div>
-
-            <button class="btn-finalize" onclick="alert('Indo para pagamento...')">FINALIZAR COMPRA</button>
-        </div>
-    </div>
-
-    <script>
-        // --- LÓGICA DO CARRINHO ---
-        let cart = [];
-
-        function addToCart(name, price, image) {
-            cart.push({ name, price, image });
-            updateCartIcon();
-            alert(`"${name}" adicionado ao carrinho!`);
-        }
-
-        function updateCartIcon() {
-            const badge = document.getElementById('cart-count');
-            badge.innerText = cart.length;
-            if (cart.length > 0) {
-                badge.style.display = 'flex';
-            } else {
-                badge.style.display = 'none';
-            }
-        }
-
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            renderCartItems();
-            updateCartIcon();
-        }
-
-        function renderCartItems() {
-            const container = document.getElementById('cartItemsContainer');
-            const totalElement = document.getElementById('cartTotal');
-            
-            container.innerHTML = ''; 
-
-            if (cart.length === 0) {
-                container.innerHTML = '<p style="text-align: center; color: #777;">Seu carrinho está vazio.</p>';
-                totalElement.innerText = 'R$ 0,00';
-                return;
-            }
-
-            let totalPrice = 0;
-
-            cart.forEach((item, index) => {
-                totalPrice += item.price;
-                const itemHTML = `
-                    <div class="cart-item">
-                        <img src="${item.image}" alt="${item.name}">
-                        <div class="cart-info">
-                            <div class="cart-name">${item.name}</div>
-                            <div class="cart-price">R$ ${item.price.toFixed(2)}</div>
-                        </div>
-                        <button class="btn-remove" onclick="removeFromCart(${index})">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                `;
-                container.innerHTML += itemHTML;
-            });
-
-            totalElement.innerText = `R$ ${totalPrice.toFixed(2)}`;
-        }
-
-        // --- FUNÇÕES DE MODAL ---
-        function openLoginModal() {
-            document.getElementById('loginModal').style.display = 'flex';
-        }
-
-        function openCartModal() {
-            renderCartItems(); 
-            document.getElementById('cartModal').style.display = 'flex';
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
-
-        function register() {
-            alert('Cadastro realizado com sucesso! Bem-vindo à HARDZION.');
-            closeModal('loginModal');
-        }
-
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.style.display = "none";
-            }
-        }
-    </script>
-</body>
-</html>
