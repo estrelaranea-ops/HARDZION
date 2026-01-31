@@ -101,7 +101,7 @@
             background-color: #111;
             transition: transform 0.3s;
         }
-        .card:hover { transform: translateY(-5px); border-color: #ff0000; }
+        .card:hover { transform: translateY(-5px); border-color: #00c200; } /* Borda verde ao passar o mouse */
 
         .item-placeholder {
             width: 100%;
@@ -134,9 +134,10 @@
             align-items: center;
         }
 
+        /* --- BOTÃO COMPRAR (VERDE) --- */
         .btn-comprar {
             flex: 1;
-            background-color: #ff0000;
+            background-color: #00c200; /* VERDE FORTE */
             color: white;
             border: none;
             padding: 10px;
@@ -147,7 +148,7 @@
             font-size: 0.9rem;
             transition: 0.2s;
         }
-        .btn-comprar:hover { background-color: #cc0000; }
+        .btn-comprar:hover { background-color: #009900; } /* Verde mais escuro no mouse */
 
         .btn-plus {
             width: 35px;
@@ -163,7 +164,7 @@
             justify-content: center;
             transition: 0.2s;
         }
-        .btn-plus:hover { background-color: #ff0000; border-color: #ff0000; }
+        .btn-plus:hover { background-color: #00c200; border-color: #00c200; }
 
         /* --- BOTÕES DE CATEGORIA --- */
         .categories-nav {
@@ -198,16 +199,16 @@
             border-color: #ff0000;
         }
 
-        /* --- MODAL DE LOGIN (NOVO) --- */
+        /* --- MODAL DE LOGIN --- */
         .modal {
-            display: none; /* Oculto por padrão */
+            display: none;
             position: fixed;
             z-index: 1000;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.85); /* Fundo escuro transparente */
+            background-color: rgba(0, 0, 0, 0.85);
             align-items: center;
             justify-content: center;
             backdrop-filter: blur(5px);
@@ -368,7 +369,6 @@
     </div>
 
     <script>
-        // Funções do Carrinho
         const btns = document.querySelectorAll('.btn-comprar');
         btns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -376,7 +376,7 @@
             });
         });
 
-        // Funções do Modal de Login
+        // Funções do Modal
         function openModal() {
             document.getElementById('loginModal').style.display = 'flex';
         }
@@ -390,7 +390,6 @@
             closeModal();
         }
 
-        // Fechar modal se clicar fora da caixa
         window.onclick = function(event) {
             const modal = document.getElementById('loginModal');
             if (event.target == modal) {
