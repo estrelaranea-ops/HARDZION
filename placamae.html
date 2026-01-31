@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placas Mãe - HARDZION</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* MANTENDO O MESMO CSS PADRÃO */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+        
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .wolf-coins { color: #ccc; font-weight: bold; }
+
+        .user-btn {
+            background: transparent;
+            border: 1px solid #fff;
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: 0.3s;
+        }
+        .user-btn:hover { background: #333; }
+
+        main {
+            width: 100%;
+            max-width: 1200px;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+            padding-bottom: 20px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: #ff0000;
+        }
+
+        /* Botão Voltar */
+        .btn-back {
+            background-color: transparent;
+            border: 1px solid #ff0000;
+            color: #ff0000;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-back:hover { background-color: #ff0000; color: #fff; }
+
+        /* Grid de Produtos */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .card {
+            border: 2px solid #ffffff;
+            border-radius: 20px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #111;
+            transition: transform 0.3s;
+            height: 380px; 
+        }
+        .card:hover { transform: translateY(-5px); border-color: #ff0000; }
+
+        .card-img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            background-color: #222;
+        }
+
+        .item-info { text-align: center; width: 100%; margin: 10px 0; }
+        .item-name { font-size: 1.2rem; font-weight: bold; margin-bottom: 5px; }
+        .item-desc { font-size: 0.8rem; color: #888; margin-bottom: 10px; }
+        .item-price { font-size: 1.3rem; color: #ff0000; font-weight: bold; }
+
+        .btn-comprar {
+            width: 100%;
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+        .btn-comprar:hover { background-color: #cc0000; }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">HARDZION</a>
+        <div class="header-right">
+            <span class="wolf-coins">WOLF COINS: 0</span>
+            <div class="user-actions">
+                <button class="user-btn"><i class="fas fa-shopping-cart"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h1 class="section-title">Placas Mãe</h1>
+            <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar</a>
+        </div>
+
+        <div class="products-grid">
+            
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=400&auto=format&fit=crop" class="card-img" alt="Asus Rog">
+                <div class="item-info">
+                    <div class="item-name">Asus ROG Strix Z790</div>
+                    <div class="item-desc">LGA 1700, DDR5, Wi-Fi 6E</div>
+                    <div class="item-price">R$ 2.899,00</div>
+                </div>
+                <button class="btn-comprar" onclick="alert('Adicionado ao carrinho!')">COMPRAR</button>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1531297461136-8208630be69d?q=80&w=400&auto=format&fit=crop" class="card-img" alt="Gigabyte Aorus">
+                <div class="item-info">
+                    <div class="item-name">Gigabyte B650 Aorus Elite</div>
+                    <div class="item-desc">AM5, DDR5, PCIe 5.0</div>
+                    <div class="item-price">R$ 1.650,00</div>
+                </div>
+                <button class="btn-comprar" onclick="alert('Adicionado ao carrinho!')">COMPRAR</button>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1563770095-39d46baa2c7c?q=80&w=400&auto=format&fit=crop" class="card-img" alt="MSI TUF">
+                <div class="item-info">
+                    <div class="item-name">Asus TUF Gaming B550M</div>
+                    <div class="item-desc">AM4, DDR4, Custo benefício</div>
+                    <div class="item-price">R$ 950,00</div>
+                </div>
+                <button class="btn-comprar" onclick="alert('Adicionado ao carrinho!')">COMPRAR</button>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1628126040854-8c8c7c9c0b1e?q=80&w=400&auto=format&fit=crop" class="card-img" alt="Asrock">
+                <div class="item-info">
+                    <div class="item-name">ASRock H610M-HVS</div>
+                    <div class="item-desc">LGA 1700, DDR4, Entrada</div>
+                    <div class="item-price">R$ 489,00</div>
+                </div>
+                <button class="btn-comprar" onclick="alert('Adicionado ao carrinho!')">COMPRAR</button>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>
