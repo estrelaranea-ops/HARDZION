@@ -59,7 +59,6 @@
             align-items: center;
             gap: 5px;
             transition: 0.3s;
-            position: relative; /* Para o badge do carrinho */
         }
         .user-btn:hover { background: #333; }
 
@@ -108,7 +107,7 @@
 
         .card {
             width: 250px;
-            height: 350px; /* Aumentei um pouco para caber o preço */
+            height: 350px;
             border: 2px solid #ffffff;
             border-radius: 20px;
             padding: 15px;
@@ -159,9 +158,10 @@
             align-items: center;
         }
 
+        /* Botão Comprar (Verde) */
         .btn-comprar {
             flex: 1;
-            background-color: #00c200; /* Verde */
+            background-color: #00c200;
             color: white;
             border: none;
             padding: 10px;
@@ -190,7 +190,7 @@
         }
         .btn-plus:hover { background-color: #00c200; border-color: #00c200; }
 
-        /* --- BOTÕES DE CATEGORIA --- */
+        /* --- BOTÕES DE CATEGORIA (AZUL METALICO) --- */
         .categories-nav {
             display: flex;
             justify-content: center;
@@ -201,26 +201,30 @@
         }
 
         .cat-btn {
-            background-color: #ff0000;
+            /* Gradiente Metálico Azul */
+            background: linear-gradient(180deg, #00509d 0%, #002a52 100%);
             color: white;
-            border: 1px solid #fff;
+            border: 2px solid #00c6ff; /* Borda Ciano Brilhante */
             padding: 12px 20px;
             font-size: 0.9rem;
             font-weight: bold;
             text-transform: uppercase;
             cursor: pointer;
             border-radius: 5px;
-            transition: 0.3s;
+            transition: all 0.3s ease;
             min-width: 120px;
             flex: 1;
             max-width: 180px;
             text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.5);
         }
 
         .cat-btn:hover {
-            background-color: #fff;
-            color: #000;
-            border-color: #ff0000;
+            /* Efeito de brilho ao passar o mouse */
+            background: linear-gradient(180deg, #0073e6 0%, #004080 100%);
+            border-color: #ffffff;
+            box-shadow: 0 0 15px #00c6ff;
+            transform: translateY(-2px);
         }
 
         /* --- MODAIS (LOGIN E CARRINHO) --- */
@@ -252,7 +256,6 @@
             overflow-y: auto;
         }
 
-        /* Estilo específico para o Carrinho (Borda Verde) */
         #cartModal .modal-content {
             border-color: #00c200;
             box-shadow: 0 0 20px rgba(0, 194, 0, 0.3);
@@ -274,7 +277,6 @@
         }
         .close:hover { color: #fff; }
 
-        /* Estilos do Formulário */
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; margin-bottom: 5px; font-size: 0.9rem; color: #ccc; }
         .form-group input {
@@ -302,7 +304,6 @@
         }
         .btn-submit:hover { background-color: #cc0000; }
 
-        /* Estilos dos Itens do Carrinho */
         .cart-item {
             display: flex;
             justify-content: space-between;
@@ -499,7 +500,7 @@
             const container = document.getElementById('cartItemsContainer');
             const totalElement = document.getElementById('cartTotal');
             
-            container.innerHTML = ''; // Limpa o conteúdo atual
+            container.innerHTML = ''; 
 
             if (cart.length === 0) {
                 container.innerHTML = '<p style="text-align: center; color: #777;">Seu carrinho está vazio.</p>';
@@ -535,7 +536,7 @@
         }
 
         function openCartModal() {
-            renderCartItems(); // Atualiza a lista antes de abrir
+            renderCartItems(); 
             document.getElementById('cartModal').style.display = 'flex';
         }
 
@@ -548,7 +549,6 @@
             closeModal('loginModal');
         }
 
-        // Fechar ao clicar fora
         window.onclick = function(event) {
             if (event.target.classList.contains('modal')) {
                 event.target.style.display = "none";
