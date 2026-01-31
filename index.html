@@ -59,8 +59,26 @@
             align-items: center;
             gap: 5px;
             transition: 0.3s;
+            position: relative; /* Para o badge do carrinho */
         }
         .user-btn:hover { background: #333; }
+
+        /* Contador do carrinho */
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #ff0000;
+            color: white;
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
 
         /* --- ÁREA PRINCIPAL --- */
         main {
@@ -90,7 +108,7 @@
 
         .card {
             width: 250px;
-            height: 300px;
+            height: 350px; /* Aumentei um pouco para caber o preço */
             border: 2px solid #ffffff;
             border-radius: 20px;
             padding: 15px;
@@ -101,7 +119,7 @@
             background-color: #111;
             transition: transform 0.3s;
         }
-        .card:hover { transform: translateY(-5px); border-color: #00c200; } /* Borda verde ao passar o mouse */
+        .card:hover { transform: translateY(-5px); border-color: #00c200; }
 
         .item-placeholder {
             width: 100%;
@@ -127,6 +145,13 @@
             margin-top: 10px;
         }
 
+        .item-price {
+            font-size: 1.2rem;
+            color: #00c200;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+
         .action-row {
             display: flex;
             width: 100%;
@@ -134,10 +159,9 @@
             align-items: center;
         }
 
-        /* --- BOTÃO COMPRAR (VERDE) --- */
         .btn-comprar {
             flex: 1;
-            background-color: #00c200; /* VERDE FORTE */
+            background-color: #00c200; /* Verde */
             color: white;
             border: none;
             padding: 10px;
@@ -148,7 +172,7 @@
             font-size: 0.9rem;
             transition: 0.2s;
         }
-        .btn-comprar:hover { background-color: #009900; } /* Verde mais escuro no mouse */
+        .btn-comprar:hover { background-color: #009900; }
 
         .btn-plus {
             width: 35px;
@@ -199,7 +223,7 @@
             border-color: #ff0000;
         }
 
-        /* --- MODAL DE LOGIN --- */
+        /* --- MODAIS (LOGIN E CARRINHO) --- */
         .modal {
             display: none;
             position: fixed;
@@ -220,10 +244,18 @@
             border-radius: 15px;
             padding: 30px;
             width: 90%;
-            max-width: 400px;
+            max-width: 450px;
             position: relative;
             box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
             animation: slideDown 0.3s ease;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        /* Estilo específico para o Carrinho (Borda Verde) */
+        #cartModal .modal-content {
+            border-color: #00c200;
+            box-shadow: 0 0 20px rgba(0, 194, 0, 0.3);
         }
 
         @keyframes slideDown {
@@ -240,8 +272,9 @@
             font-weight: bold;
             cursor: pointer;
         }
-        .close:hover { color: #ff0000; }
+        .close:hover { color: #fff; }
 
+        /* Estilos do Formulário */
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; margin-bottom: 5px; font-size: 0.9rem; color: #ccc; }
         .form-group input {
@@ -269,6 +302,52 @@
         }
         .btn-submit:hover { background-color: #cc0000; }
 
+        /* Estilos dos Itens do Carrinho */
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+            padding: 10px 0;
+        }
+        .cart-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .cart-info { flex: 1; }
+        .cart-name { font-size: 0.9rem; font-weight: bold; }
+        .cart-price { color: #00c200; font-size: 0.9rem; }
+        .btn-remove {
+            color: #ff0000;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        .cart-total {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            text-align: right;
+            font-weight: bold;
+            color: #fff;
+        }
+        .btn-finalize {
+            width: 100%;
+            padding: 12px;
+            background-color: #00c200;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            text-transform: uppercase;
+        }
+        .btn-finalize:hover { background-color: #009900; }
+
         @media (max-width: 768px) {
             header { flex-direction: column; gap: 15px; }
             .promo-container { flex-direction: column; align-items: center; }
@@ -283,11 +362,13 @@
         <div class="header-right">
             <span class="wolf-coins">WOLF COINS: 0</span>
             <div class="user-actions">
-                <button class="user-btn" onclick="openModal()">
+                <button class="user-btn" onclick="openLoginModal()">
                     <i class="fas fa-user"></i> Login / Cadastro
                 </button>
-                <button class="user-btn">
+                
+                <button class="user-btn" onclick="openCartModal()">
                     <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count" class="cart-count" style="display: none;">0</span>
                 </button>
             </div>
         </div>
@@ -302,8 +383,9 @@
                     <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?q=80&w=400&auto=format&fit=crop" class="card-img" alt="CPU">
                 </div>
                 <div class="item-title">Item em Promoção 01<br><span style="font-size:0.8rem; color:#aaa;">Processador i9</span></div>
+                <div class="item-price">R$ 3.999,00</div>
                 <div class="action-row">
-                    <button class="btn-comprar">COMPRAR</button>
+                    <button class="btn-comprar" onclick="addToCart('Processador i9', 3999.00, 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?q=80&w=400&auto=format&fit=crop')">COMPRAR</button>
                     <button class="btn-plus">+</button>
                 </div>
             </div>
@@ -313,8 +395,9 @@
                     <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?q=80&w=400&auto=format&fit=crop" class="card-img" alt="GPU">
                 </div>
                 <div class="item-title">Item em Promoção 02<br><span style="font-size:0.8rem; color:#aaa;">Placa de Vídeo</span></div>
+                <div class="item-price">R$ 2.500,00</div>
                 <div class="action-row">
-                    <button class="btn-comprar">COMPRAR</button>
+                    <button class="btn-comprar" onclick="addToCart('Placa de Vídeo', 2500.00, 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?q=80&w=400&auto=format&fit=crop')">COMPRAR</button>
                     <button class="btn-plus">+</button>
                 </div>
             </div>
@@ -324,8 +407,9 @@
                      <img src="https://images.unsplash.com/photo-1562976540-1502c2145186?q=80&w=400&auto=format&fit=crop" class="card-img" alt="RAM">
                 </div>
                 <div class="item-title">Item em Promoção 03<br><span style="font-size:0.8rem; color:#aaa;">Kit Memória</span></div>
+                <div class="item-price">R$ 450,00</div>
                 <div class="action-row">
-                    <button class="btn-comprar">COMPRAR</button>
+                    <button class="btn-comprar" onclick="addToCart('Kit Memória', 450.00, 'https://images.unsplash.com/photo-1562976540-1502c2145186?q=80&w=400&auto=format&fit=crop')">COMPRAR</button>
                     <button class="btn-plus">+</button>
                 </div>
             </div>
@@ -344,7 +428,7 @@
 
     <div id="loginModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
             <h2 style="text-align: center; color: #ff0000; font-family: 'Orbitron', sans-serif; margin-bottom: 20px;">CADASTRO</h2>
             <form onsubmit="event.preventDefault(); register();">
                 <div class="form-group">
@@ -368,32 +452,106 @@
         </div>
     </div>
 
-    <script>
-        const btns = document.querySelectorAll('.btn-comprar');
-        btns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                alert('Produto adicionado ao carrinho!');
-            });
-        });
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('cartModal')">&times;</span>
+            <h2 style="text-align: center; color: #00c200; font-family: 'Orbitron', sans-serif; margin-bottom: 20px;">SEU CARRINHO</h2>
+            
+            <div id="cartItemsContainer">
+                <p style="text-align: center; color: #777;">Seu carrinho está vazio.</p>
+            </div>
 
-        // Funções do Modal
-        function openModal() {
+            <div class="cart-total">
+                Total: <span id="cartTotal">R$ 0,00</span>
+            </div>
+
+            <button class="btn-finalize" onclick="alert('Indo para pagamento...')">FINALIZAR COMPRA</button>
+        </div>
+    </div>
+
+    <script>
+        // --- LÓGICA DO CARRINHO ---
+        let cart = [];
+
+        function addToCart(name, price, image) {
+            cart.push({ name, price, image });
+            updateCartIcon();
+            alert(`"${name}" adicionado ao carrinho!`);
+        }
+
+        function updateCartIcon() {
+            const badge = document.getElementById('cart-count');
+            badge.innerText = cart.length;
+            if (cart.length > 0) {
+                badge.style.display = 'flex';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            renderCartItems();
+            updateCartIcon();
+        }
+
+        function renderCartItems() {
+            const container = document.getElementById('cartItemsContainer');
+            const totalElement = document.getElementById('cartTotal');
+            
+            container.innerHTML = ''; // Limpa o conteúdo atual
+
+            if (cart.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #777;">Seu carrinho está vazio.</p>';
+                totalElement.innerText = 'R$ 0,00';
+                return;
+            }
+
+            let totalPrice = 0;
+
+            cart.forEach((item, index) => {
+                totalPrice += item.price;
+                const itemHTML = `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="cart-info">
+                            <div class="cart-name">${item.name}</div>
+                            <div class="cart-price">R$ ${item.price.toFixed(2)}</div>
+                        </div>
+                        <button class="btn-remove" onclick="removeFromCart(${index})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                container.innerHTML += itemHTML;
+            });
+
+            totalElement.innerText = `R$ ${totalPrice.toFixed(2)}`;
+        }
+
+        // --- FUNÇÕES DE MODAL ---
+        function openLoginModal() {
             document.getElementById('loginModal').style.display = 'flex';
         }
 
-        function closeModal() {
-            document.getElementById('loginModal').style.display = 'none';
+        function openCartModal() {
+            renderCartItems(); // Atualiza a lista antes de abrir
+            document.getElementById('cartModal').style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
         }
 
         function register() {
             alert('Cadastro realizado com sucesso! Bem-vindo à HARDZION.');
-            closeModal();
+            closeModal('loginModal');
         }
 
+        // Fechar ao clicar fora
         window.onclick = function(event) {
-            const modal = document.getElementById('loginModal');
-            if (event.target == modal) {
-                modal.style.display = "none";
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
             }
         }
     </script>
