@@ -117,7 +117,9 @@
             transition: transform 0.3s;
             height: 420px; /* Mais alto pois a descrição do PC é maior */
         }
-        .card:hover { transform: translateY(-5px); border-color: #ff0000; }
+        
+        /* ALTERADO: Borda Verde ao passar o mouse */
+        .card:hover { transform: translateY(-5px); border-color: #00c200; }
 
         .card-img {
             width: 100%;
@@ -130,11 +132,14 @@
         .item-info { text-align: center; width: 100%; margin: 10px 0; }
         .item-name { font-size: 1.2rem; font-weight: bold; margin-bottom: 5px; }
         .item-desc { font-size: 0.8rem; color: #888; margin-bottom: 10px; line-height: 1.4; }
-        .item-price { font-size: 1.3rem; color: #ff0000; font-weight: bold; }
+        
+        /* ALTERADO: Preço Verde */
+        .item-price { font-size: 1.3rem; color: #00c200; font-weight: bold; }
 
+        /* ALTERADO: Botão Comprar Verde */
         .btn-comprar {
             width: 100%;
-            background-color: #ff0000;
+            background-color: #00c200; /* Verde */
             color: white;
             border: none;
             padding: 12px;
@@ -145,7 +150,7 @@
             font-size: 0.9rem;
             transition: 0.2s;
         }
-        .btn-comprar:hover { background-color: #cc0000; }
+        .btn-comprar:hover { background-color: #009900; } /* Verde escuro */
 
     </style>
 </head>
